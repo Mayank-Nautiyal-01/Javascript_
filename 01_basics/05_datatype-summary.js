@@ -81,3 +81,45 @@ let bigNum = 12345678901234567890n; //bigInt
 // Object	    let obj = { name: "Mayank" };	  "object"
 
 // Function	    function test() {} or let func = () => {};	   "function"
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//here memory is of two types:
+//stack and heap memory
+//stack memory is used in primitive datatype
+//heap memory is used in nonprimitive datatype
+
+//stack memory:Data is copied when assigned to another variable (pass-by-value)
+
+let a = 10;
+let b = a;  // Copy of a is assigned to y
+b = 20;
+
+console.log(a); // 10
+console.log(b); // 20
+
+//Explanation:
+
+// x = 10 is stored in the stack
+// y = x makes a copy of x, so y is independent of x
+
+//heap memory:Stores data dynamically with a reference in stack
+// When assigned to another variable, only the reference (memory address) is copied
+
+let obj1 = { name: "Mayank" };
+let obj2 = obj1;  // Reference to obj1 is assigned
+
+obj2.name = "Nautiyal"; 
+
+console.log(obj1.name); // "Nautiyal"
+console.log(obj2.name); // "Nautiyal"
+
+// Explanation:
+
+// obj1 is stored in the heap, but its reference is in the stack
+// obj2 = obj1 copies the reference, not the actual object
+// Any change in obj2 also reflects in obj1 since both point to the same heap memory
+
+//summary:
+//  Stack → Faster but stores simple data
+// Heap → Slower but stores complex data
