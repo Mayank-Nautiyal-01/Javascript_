@@ -2,7 +2,7 @@ const accountId= 14453
 let accountEmail="mayabox@gmail.com"
 var accountPassword="12345"
  accountCity="jaipur"//not a good way to do this but it works in js
-let accountState
+let accountState //undefined
 
 
  //accountId=2 //not allowed
@@ -13,12 +13,15 @@ let accountState
  console.table([accountId,accountEmail,accountPassword,accountCity,accountState]);
 
  //output
+//  ┌─────────┬─────────────────┐
 //  │ (index) │ Values          │
-// ├─────────┼─────────────────┤
-// │ 0       │ 14453           │
-// │ 1       │ 'box@gmail.com' │
-// │ 2       │ '238223'        │
-// │ 3       │ 'dehradun'      │
+//  ├─────────┼─────────────────┤
+//  │ 0       │ 14453           │
+//  │ 1       │ 'box@gmail.com' │
+//  │ 2       │ '238223'        │
+//  │ 3       │ 'dehradun'      │
+//  │ 4       │ undefined       │
+//  └─────────┴───────────────
 
 /* 
  prefer not to use var
