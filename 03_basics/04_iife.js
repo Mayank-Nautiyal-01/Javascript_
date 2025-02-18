@@ -16,7 +16,7 @@
   
 //   myFunction();  // Call the function to execute
 
-// IIFE (Immediately Invoked Function Expression):
+// -->IIFE (Immediately Invoked Function Expression):
 
 // An IIFE is defined and invoked immediately as soon as it's created.
 // There is no need to explicitly call the function after defining it; it runs automatically.
@@ -39,9 +39,9 @@
   })("IIFE");//Hello from IIFE
 
 
-  //what makes IIFE special:
+  //+++++what makes IIFE special:
 
-  //Encapsulation and Avoiding Global Namespace Pollution:
+  //++++Encapsulation and Avoiding Global Namespace Pollution:
 
 //   IIFE (Immediately Invoked Function Expression) ka use isliye hota hai kyunki yeh ek nayi local scope create karta hai. Matlab, jo variables aur functions aap IIFE ke andar define karte ho, wo sirf usi scope mein accessible hote hain, aur global scope ko affect nahi karte. Iska fayda yeh hai ki aap temporary variables ko safe rakh sakte ho bina global namespace ko polluted kiye.
 
