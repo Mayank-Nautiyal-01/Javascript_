@@ -117,7 +117,7 @@ function addone(num) {
     // Function declaration: Function ka naam aur body dono hoisted hote hain, isliye aap usse pehle bhi call kar sakte ho.
 
 
-console.log(add(5)); // Error: add is undefined becuase add ko uski declration se phele access kr rhe h
+//console.log(add(5)); // Error: add is undefined becuase add ko uski declration se phele access kr rhe h
 
 const add = function(num) {
   return num + 2;
