@@ -1,0 +1,185 @@
+### **What is DOM (Document Object Model)?**  
+DOM (Document Object Model) is a programming interface that represents the structure of an HTML document as a tree-like structure. It allows JavaScript to dynamically access and manipulate elements, attributes, and styles in an HTML page.
+
+---
+
+## **1. Understanding DOM Structure**
+When a web page is loaded, the browser converts the HTML into a **DOM Tree**.  
+
+For example, consider this simple HTML:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Example</title>
+</head>
+<body>
+    <h1 id="heading">Hello, World!</h1>
+    <p class="text">This is a paragraph.</p>
+</body>
+</html>
+```
+The **DOM representation** will be:
+```
+Document
+ ├── <html>
+ │    ├── <head>
+ │    │    ├── <title>DOM Example</title>
+ │    ├── <body>
+ │         ├── <h1 id="heading">Hello, World!</h1>
+ │         ├── <p class="text">This is a paragraph.</p>
+```
+
+---
+
+## **2. DOM Selectors (Selecting Elements in JavaScript)**
+
+To interact with the DOM, we first need to select elements. We can do this using **DOM Selectors**.
+
+### **a) Selecting by ID (`getElementById`)**
+```js
+let heading = document.getElementById("heading"); 
+console.log(heading.innerText);  // Output: Hello, World!
+```
+
+### **b) Selecting by Class Name (`getElementsByClassName`)**
+Returns a **HTMLCollection** (like an array but not exactly an array).
+```js
+let paragraphs = document.getElementsByClassName("text");
+console.log(paragraphs[0].innerText);  // Output: This is a paragraph.
+```
+
+### **c) Selecting by Tag Name (`getElementsByTagName`)**
+Returns all elements with a specific tag name.
+```js
+let allParagraphs = document.getElementsByTagName("p");
+console.log(allParagraphs.length); // Output: 1
+```
+
+### **d) Selecting using Query Selector (`querySelector` and `querySelectorAll`)**
+- `querySelector()` selects the **first** matching element.
+- `querySelectorAll()` selects **all** matching elements (returns a **NodeList**).
+
+```js
+let firstPara = document.querySelector(".text");  // Selects first paragraph with class "text"
+console.log(firstPara.innerText);
+
+let allParas = document.querySelectorAll(".text");  // Selects all paragraphs with class "text"
+console.log(allParas.length);
+```
+
+---
+
+## **3. Modifying the DOM (Adding Content Dynamically)**
+Once we select an element, we can change its **text, HTML, attributes, or styles**.
+
+### **a) Changing Text Content (`innerText` and `textContent`)**
+```js
+heading.innerText = "Welcome to DOM!";
+```
+
+### **b) Changing HTML Content (`innerHTML`)**
+```js
+heading.innerHTML = "<i>Welcome to DOM Manipulation!</i>";
+```
+
+### **c) Changing Attributes (`setAttribute`, `getAttribute`)**
+```js
+let link = document.querySelector("a");
+link.setAttribute("href", "https://www.google.com"); 
+console.log(link.getAttribute("href")); // Output: https://www.google.com
+```
+
+### **d) Changing Styles (`style` property)**
+```js
+heading.style.color = "red";
+heading.style.fontSize = "24px";
+```
+
+---
+
+## **4. Adding & Removing Elements in DOM**
+We can dynamically create, append, and remove elements using JavaScript.
+
+### **a) Creating a New Element (`createElement`, `appendChild`)**
+```js
+let newPara = document.createElement("p");
+newPara.innerText = "This is a new paragraph.";
+document.body.appendChild(newPara);
+```
+
+### **b) Removing an Element (`remove`)**
+```js
+newPara.remove(); // Removes the paragraph from the page
+```
+
+---
+
+## **5. Understanding NodeList vs HTMLCollection**
+Both are collections of elements but have key differences.
+
+### **a) `NodeList`**
+- Created by `querySelectorAll()`
+- Can be **looped** using `forEach()`
+- Can contain text nodes and comment nodes
+
+```js
+let nodeList = document.querySelectorAll("p");
+nodeList.forEach((el) => console.log(el.innerText));
+```
+
+### **b) `HTMLCollection`**
+- Created by `getElementsByClassName()` or `getElementsByTagName()`
+- **Cannot** be looped using `forEach()` directly (needs conversion to an array)
+- Only contains **HTML elements**
+
+```js
+let htmlCollection = document.getElementsByTagName("p");
+// Convert to array before using forEach
+Array.from(htmlCollection).forEach((el) => console.log(el.innerText));
+```
+
+---
+
+## **6. `Array.from()` – Converting to Array**
+Since `NodeList` and `HTMLCollection` are **not real arrays**, we can convert them using `Array.from()`.
+
+```js
+let elements = document.getElementsByClassName("text");
+let arrayElements = Array.from(elements);
+arrayElements.forEach((el) => console.log(el.innerText));
+```
+
+---
+
+## **7. Events in DOM**
+Events allow us to respond to user actions (clicks, inputs, etc.).
+
+### **a) Adding Click Event (`addEventListener`)**
+```js
+heading.addEventListener("click", function() {
+    alert("Heading clicked!");
+});
+```
+
+### **b) Changing Content on Button Click**
+```html
+<button id="btn">Click Me</button>
+<p id="demo">Hello!</p>
+```
+```js
+document.getElementById("btn").addEventListener("click", function() {
+    document.getElementById("demo").innerText = "You clicked the button!";
+});
+```
+
+---
+
+## **Summary**
+✅ DOM is a tree structure of HTML elements.  
+✅ We can select elements using **ID, Class, Tag, querySelector**.  
+✅ We can modify **content, attributes, and styles** dynamically.  
+✅ `NodeList` is a collection of nodes, while `HTMLCollection` only contains elements.  
+✅ `Array.from()` converts these collections into an array.  
+✅ We use **events** like `click`, `mouseover`, etc., to handle user actions.
+
