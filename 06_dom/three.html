@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+
+</body>
+<script>
+    // Create a new div element
+    const div = document.createElement('div');
+    console.log(div);
+    // Output: <div></div> (Empty div created)
+
+    // Add a class to the div
+    div.className = "main";
+
+    // Assign a random id to the div
+    div.id = Math.round(Math.random() * 10 + 1);
+    
+    // Set an attribute 'title' for the div
+    div.setAttribute('title', "dom padhlo");
+
+    // Apply CSS styling to the div
+    div.style.backgroundColor = "green"; // Background color is set to green
+    div.style.padding = "12px"; // Padding of 12px is applied
+
+    // Adding text inside the div
+    // div.innerText = "Learning about DOM"; 
+    // ❌ This method is not preferred as it overwrites existing content.
+
+    // Instead, we use createTextNode to add text properly
+    const addText = document.createTextNode("Learning about DOM");
+    div.appendChild(addText); // Append the text to the div
+
+    // Now, add the div inside the body to display it in the browser
+    document.body.appendChild(div);
+</script>
+</html>
+
+<!-- 
+Explanation of Key Points:
+
+Used document.createElement('div') to create a new <div>.
+
+Assigned a class name "main" using div.className.
+
+Generated a random id using Math.round(Math.random() * 10 + 1).
+
+Set an attribute 'title' to "dom padhlo".
+
+Styled the div with background color (green) and padding (12px).
+Instead of innerText, used createTextNode (preferred way to add text).
+
+Finally, appended the newly created div to the document body using document.body.appendChild(div). -->
