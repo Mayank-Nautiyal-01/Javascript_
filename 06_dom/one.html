@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic DOM</title>
+    <style>
+        .bg-black {
+            background-color: #212121;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="bg-black">
+    <div>
+        <h1 id="title">DOM Learning</h1>
+        <p id="para">This is a paragraph.</p>
+    </div>
+
+    <script>
+        // Changing text content
+        document.getElementById("title").textContent = "Updated Title";
+
+        // Changing paragraph color
+        document.getElementById("para").style.color = "lightblue";
+    </script>
+</body>
+</html>
