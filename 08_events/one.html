@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+      // 1st approach: Adding an onclick event directly in the HTML (not recommended)
+      // Example: <li onclick="alert('Owl clicked')">
+
+      // 2nd approach: Assigning an event using `onClick` (not recommended)
+      // document.getElementById('owl').onClick = function() {
+      //    alert("Owl clicked")
+      // }
+
+      // 3rd approach (BEST): Using addEventListener (recommended)
+      document.getElementById('owl').addEventListener("click", function() {
+          alert("Owl clicked");
+      });
+
+      // **Why use event objects?**
+      // The `event` object provides detailed information about the event (target, coordinates, type, etc.)
+      document.getElementById('owl').addEventListener("click", function(e) {
+          console.log(e); // Logs event details in the console
+      }, false); // `false` means event bubbling (default behavior)
+
+      // **Event Propagation: Bubbling vs. Capturing**
+      // Bubbling: The event first triggers on the target element, then moves up to its parent elements.
+      // Capturing: The event starts at the highest parent and trickles down to the target.
+
+      document.getElementById('images').addEventListener("click", function(e) {
+          console.log("Clicked inside the ul");
+      }, false); // Bubbling (default)
+
+      document.getElementById('owl').addEventListener("click", function(e) {
+          console.log("Owl clicked");
+      }, false);
+
+      // **Expected Output when clicking on "Owl" Image:**
+      // 1. "Owl clicked" (from owl's event listener)
+      // 2. "Clicked inside the ul" (from ul's event listener)
+
+      // **Why does it happen in this order?**
+      // - Since event bubbling is used (`false` flag), the event starts from the target (`owl` image) and bubbles up to the parent (`ul`).
+
+      // **Stopping Event Bubbling**
+      // If we add `e.stopPropagation()`, the event won't bubble up to the parent elements.
+      // document.getElementById('owl').addEventListener("click", function(e) {
+      //     console.log("Owl clicked");
+      //     e.stopPropagation(); // Stops the event from reaching the parent (ul)
+      // }, false);
+
+      // **Capturing Phase (Reverse Order)**
+      document.getElementById('images').addEventListener("click", function(e) {
+          console.log("Clicked inside the ul");
+      }, true); // `true` enables capturing
+
+      document.getElementById('owl').addEventListener("click", function(e) {
+          console.log("Owl clicked");
+      }, true);
+
+      // **Expected Output when clicking on "Owl" Image:**
+      // 1. "Clicked inside the ul" (capturing starts from parent)
+      // 2. "Owl clicked" (then moves down to the target)
+
+      // **Prevent Default Behavior (Example with Google Link)**
+      document.getElementById('google').addEventListener('click', function(e) {
+          e.preventDefault(); // Prevents the default navigation to Google
+          console.log("Google link clicked");
+      }, false);
+
+      // **Removing Images on Click**
+      document.querySelector('#images').addEventListener('click', function(e) {
+          // Why use this condition?
+          // This ensures that the event is triggered only when an <img> tag is clicked.
+          if (e.target.tagName === 'IMG') {
+              let removeIt = e.target.parentNode; // Selecting <li> (parent of the image)
+              removeIt.remove(); // Removing the entire <li>
+              // Alternative approach:
+              // removeIt.parentNode.removeChild(removeIt); // Another way to remove element
+          }
+      });
+
+</script>
+</html>
+
+<!-- 📝 Explanations for Key Concepts You Asked About:
+
+1️⃣ Why Use addEventListener Instead of onClick?
+✅ addEventListener is recommended because:
+
+It allows multiple event handlers for the same event.
+It supports advanced features like event propagation (capture, bubbling).
+onClick can be overridden, but addEventListener keeps all listeners intact.
+
+2️⃣ What is the Event Object (e) and Why is it Useful?
+It contains details about the event (type, target, coordinates, keys pressed, etc.).
+Example: e.target tells which element was clicked.
+Example: e.clientX, e.clientY gives mouse click coordinates.
+
+3️⃣ What is Event Propagation (Bubbling vs. Capturing)?
+🔹 Bubbling (false): Event starts from the target element and bubbles up to parents.
+🔹 Capturing (true): Event starts from the highest parent and trickles down to the target.
+
+4️⃣ What Happens if We Use e.stopPropagation()?
+It stops the event from propagating to parent elements.
+Example: If we click the owl image with e.stopPropagation(), the ul event won’t trigger.
+
+5️⃣ What is preventDefault() Used For?
+It stops the default behavior of an element.
+Example: Clicking the Google link won’t redirect to google.com.
+
+6️⃣ Why Use if(e.target.tagName === 'IMG') When Removing Images?
+This ensures that the event is triggered only when clicking an <img>, not <li> or <ul>.
+Without this, clicking anywhere inside the <ul> would remove elements. -->
