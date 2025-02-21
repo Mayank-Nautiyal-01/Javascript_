@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      /* Center align text and add smooth transition effect for background color */
+      body {
+         text-align: center;
+         font-family: Arial, sans-serif;
+         transition: background-color 0.5s ease-in-out;
+      }
+      
+      /* Styling for buttons */
+      button {
+         font-size: 18px;
+         padding: 10px 20px;
+         margin: 10px;
+         cursor: pointer;
+         border: none;
+         border-radius: 5px;
+      }
+
+      /* Start button style */
+      .start {
+            background-color: green;
+            color: white;
+      }
+
+      /* Stop button style */
+      .stop {
+            background-color: red;
+            color: white;
+      }
+    </style>
+</head>
+<body>
+    <h1>Project using SetInterval</h1>
+    <h1>Background Color Changer</h1>
+    
+    <!-- Buttons to start and stop the color-changing effect -->
+    <button class="start">Start</button>
+    <button class="stop">Stop</button>
+
+</body>
+   <script>
+
+         let IntervalId;  // Global variable to store interval ID
+
+         /**
+          * Function to generate a random hex color and apply it as background color.
+          */
+         function changeBackgroundColor() {
+            // Generate a random hex color
+            const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+            document.body.style.background = randomColor; // Apply color to background
+         }
+
+         /**
+          * Event listener for Start button.
+          * - Ensures only one interval runs at a time.
+          * - Starts changing background color every 1 second.
+          */
+         document.querySelector(".start").addEventListener("click", function() {
+            if (!IntervalId) { // Prevent multiple intervals from running
+               IntervalId = setInterval(changeBackgroundColor, 1000);
+            }
+         });
+
+         /**
+          * Event listener for Stop button.
+          * - Stops the interval using clearInterval.
+          * - Resets IntervalId to null to allow restarting.
+          */
+         document.querySelector(".stop").addEventListener("click", function() {
+            clearInterval(IntervalId); // Stop changing colors
+            IntervalId = null;  // Reset interval ID
+         });
+
+   </script>
+</html>
