@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121; color:#fff">
+    <ul class="language">
+       <li>Javascript</li> <!-- Initially, only JavaScript is in the list -->
+    </ul>
+</body>
+<script>
+    // Function to add a new language to the list using innerHTML (not optimized)
+    function addLanguage(langName){
+        const list = document.createElement('li'); // Create a new <li> element
+        list.innerHTML = `${langName}`; // Set its innerHTML (not recommended for optimization)
+        document.querySelector('.language').appendChild(list); // Append the new <li> to the <ul>
+    }
+
+    // Adding two languages using the above function
+    addLanguage("Python"); 
+    addLanguage("Java"); 
+
+    // Current output in <ul>:
+    // <li>Javascript</li>
+    // <li>Python</li>
+    // <li>Java</li>
+
+    // Optimized approach to adding elements (avoiding innerHTML for better performance)
+    function addOptiLanguage(langName){
+        const list = document.createElement('li'); 
+        // Using createTextNode instead of innerHTML (better for security and efficiency)
+        list.appendChild(document.createTextNode(langName)); 
+        document.querySelector('.language').appendChild(list);
+    }
+
+    // Adding languages using the optimized approach
+    addOptiLanguage('GoLang');
+    addOptiLanguage('TypeScript');
+
+    // Current output in <ul>:
+    // <li>Javascript</li>
+    // <li>Python</li>
+    // <li>Java</li>
+    // <li>GoLang</li>
+    // <li>TypeScript</li>
+
+    // Editing an element (Replacing the second language with "Mojo")
+    const SecondLang = document.querySelector('li:nth-child(2)'); // Selecting second <li>
+    
+    // Instead of modifying innerHTML, we create a new element and replace the old one
+    const newli = document.createElement('li');
+    newli.textContent = "Mojo"; // Setting new text content
+    SecondLang.replaceWith(newli); // Replacing the second element
+
+    // Updated output:
+    // <li>Javascript</li>
+    // <li>Mojo</li>
+    // <li>Java</li>
+    // <li>GoLang</li>
+    // <li>TypeScript</li>
+
+    // Editing the first language (Replacing "Javascript" with "CPP(c++)")
+    const firstLang = document.querySelector('li:first-child');
+    // const newLi = document.createElement('li');
+      // newLi.textContent = "CPP (C++)";
+    // firstLang.replaceWith(newLi); // Alternative way (creating a new <li> and replacing)
+
+    // Another optimized way: Directly replacing the element using outerHTML
+    firstLang.outerHTML = '<li>CPP(c++)</li>'; 
+
+    // Updated output:
+    // <li>CPP(c++)</li>
+    // <li>Mojo</li>
+    // <li>Java</li>
+    // <li>GoLang</li>
+    // <li>TypeScript</li>
+
+    // Removing the last element in the list
+    const lastLang = document.querySelector('li:last-child');
+    lastLang.remove(); // Removing the last <li>
+
+    // Final output in <ul>:
+    // <li>CPP(c++)</li>
+    // <li>Mojo</li>
+    // <li>Java</li>
+    // <li>GoLang</li>
+</script>
+</html>
+
+
+<!-- Summary of Key Changes and Expected Outputs:
+
+Initially, the list contained only "Javascript".
+
+"Python" and "Java" were added using an unoptimized approach (innerHTML).
+"GoLang" and "TypeScript" were added using an optimized approach (createTextNode).
+
+The second language ("Python") was replaced with "Mojo".
+
+"Javascript" was replaced with "CPP(c++)" using outerHTML and its up to u which one u have to use.
+
+The last language ("TypeScript") was removed from the list. -->
+
+<!-- Final Output in the <ul>:
+
+<ul class="language">
+    <li>CPP(c++)</li>
+    <li>Mojo</li>
+    <li>Java</li>
+    <li>GoLang</li>
+</ul> -->
