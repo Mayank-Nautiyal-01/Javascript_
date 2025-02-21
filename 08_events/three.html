@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to Javascript</h1>
+    <button class="start">Start</button>
+    <button class="stop">Stop</button>
+    
+</body>
+  <script>
+    //lets see set interval
+     //set interval goes on and on after given point of time
+      const sayDate=function(str){
+        console.log(str,Date.now());
+     }
+    //   const IntervalId= setInterval(sayDate,1000,"HEY")//we can also set parameter like we are giving hi parameter to sayDate
+
+      //lets do it like this when we click start button it will start and when we click stop button it will stop
+
+      //start
+      let IntervalId
+      document.querySelector(".start").addEventListener("click",function(){
+         IntervalId= setInterval(sayDate,1000,"HEY")
+      })
+
+      //stop
+      document.querySelector(".stop").addEventListener("click",function(){
+        clearInterval(IntervalId)
+      })
+  </script>
+</html>
