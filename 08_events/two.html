@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h1>Welcome in JavaScript</h1>
+    <button class="stop">Stop</button>
+</body>
+<script>
+    // **setTimeout() Example 1**: Delayed Execution
+    // This will execute the function after 2 seconds.
+    // setTimeout(function(){
+    //     console.log("hello")
+    // }, 2000)
+
+    // **Another way to use setTimeout()**
+    const sayHello = function(){
+         console.log("hello"); // Logs "hello" in the console after 2 sec
+    }
+    setTimeout(sayHello, 2000); // Calls sayHello function after 2 sec
+
+    // **setTimeout() Example 2: Changing the H1 Text**
+    const changeText = function() {
+        document.querySelector('h1').innerHTML = "Hello Everyone in JS";
+    }
+
+    // **Storing setTimeout in a variable**
+    // This allows us to reference it later for stopping the timeout if needed.
+    const changeMe = setTimeout(changeText, 2000);
+
+    // **Why store setTimeout in a variable?**
+    // If there are multiple timeouts, we can selectively stop only the right one using clearTimeout().
+    
+    // **Stopping the Timeout Before It Executes**
+    // If the button is clicked before 2 seconds, it will prevent the H1 from changing.
+
+    // **Method 1: Using a separate variable and function**
+    // const stop = document.querySelector(".stop");
+    // stop.addEventListener('click', function(){
+    //     clearTimeout(changeMe); // Stops the scheduled timeout
+    //     console.log("stopped");
+    // });
+
+    // **Method 2: Doing it in one go (Recommended)**
+    document.querySelector(".stop").addEventListener("click", function(){
+        clearTimeout(changeMe); // Stops the timeout before it executes
+        console.log("stopped"); // Logs "stopped" in console
+    });
+
+</script>
+</html>
+
+<!-- 📝 Explanation of Key Concepts:
+
+1️⃣ What Does setTimeout() Do?
+setTimeout() schedules a function to run after a specified time.
+Example: setTimeout(sayHello, 2000); → Executes sayHello after 2 seconds.
+
+2️⃣ Why Store setTimeout in a Variable?
+This allows us to cancel it later using clearTimeout().
+
+3️⃣ How Does clearTimeout() Work?
+clearTimeout(changeMe); cancels the scheduled timeout before it executes.
+Example:
+If the "Stop" button is clicked before 2 seconds, the <h1> will not change.
+
+🚀 Expected Output:
+
+1️⃣ After 2 seconds, "hello" will be logged in the console.
+
+2️⃣ After 2 seconds, the <h1> will change from "Welcome in JavaScript" → "Hello Everyone in JS".
+
+3️⃣ If you click the Stop button before 2 seconds, the <h1> will not change, and "stopped" will be logged in the console. -->
