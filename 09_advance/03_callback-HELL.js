@@ -51,9 +51,38 @@ getuser(userId,function(user){
 
 //ex
 
-function fetchData(url,callback) {
-    fetch(url)
-    .then(response=>response.json())
-    .then(data=>callback(null,data))
-    .catch(error=>callback(error,null))
+function fetchData(url, callback) {
+    fetch(url)  // URL se data fetch karna
+        .then(response => response.json())  // Response ko JSON me convert karna
+        .then(data => callback(null, data))  // Callback ko data pass karna (Error null hai)
+        .catch(error => callback(error, null));  // Agar error aaye to callback me error pass karna
 }
+
+
+// !👀 Step-by-Step Execution:
+// 1️⃣ fetch(url)
+
+// Yeh function ek asynchronous request bhejta hai aur ek Promise return karta hai.
+// Jab response aata hai, tab .then() execute hota hai.
+// 2️⃣ .then(response => response.json())
+
+// Response ko JSON format me convert kar raha hai.
+// Yeh bhi ek asynchronous operation hai, jo ek aur Promise return karega.
+// 3️⃣ .then(data => callback(null, data))
+
+// Jo bhi JSON data milta hai, wo callback function me pass ho jata hai.
+// null isliye diya gaya hai kyunki error nahi aayi hai.
+// 4️⃣ .catch(error => callback(error, null))
+
+// Agar request fail ho jaye (e.g., network error ya API unavailable), to callback function me error pass ho jayega.
+
+
+// !❌ Issue: Inversion of Control (IoC)
+// 👉 Problem yeh hai ki control callback function ke paas chala gaya.
+
+// Humne fetchData function ko control diya, par callback kab aur kaise execute hoga, wo hum decide nahi kar sakte.
+// Agar callback function call hi na ho ya galat tarike se call ho, to hume pata bhi nahi chalega.
+// Error handling complicated ho sakti hai.
+
+
+//!!these problem comes in callback which is solved using promises and async/await.
